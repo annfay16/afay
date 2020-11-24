@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	     <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47132899-3"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47132899-3');
+      </script>
+      <title>Homesite Callback Widget</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- JQuery Library -->
+      <script type="text/javascript" src="lib/jquery-3.2.1.min.js"></script>
+      <!-- Bootstrap 3.x from CDN -->
+      <link rel="stylesheet" href="stylesheets/bootstrap-3.3.5.min.css">
+      <link rel="stylesheet" href="stylesheets/bootstrap-theme-3.3.5.min.css">
+      <script src="lib/bootstrap-3.3.5.min.js"></script>
+      <script type="text/javascript" src="widget_init_Homesite.js"></script>
+      <!-- The sample main code leveraging and importing the Genesys Widgets library and stylesheet -->
+      <script type="text/javascript" src="widget_main_sample_Homesite.js"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="stylesheets/callBackPage_PRG.css">
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5MXX7N"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-N5MXX7N');</script>
+      <!-- End Google Tag Manager -->
+   </head>
+   <body onload="OpenCallbackForm()">
+      <script>
+         // Interface with UI
+         var getQueryString = function(field, url) {
+         var href = url ? url : window.location.href;
+         var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+         var string = reg.exec(href);
+         return string ? string[1] : null;
+         };
+         var policyNumber = getQueryString('PolicyNumber');
+         var OpenCallbackForm = function() {
+           if (localWidgetPlugin) {
+               console.log("Policy number is ", policyNumber);
+               localWidgetPlugin.command('Callback.open', {
+                   userData: {
+                       'Callback': 'Scheduled Callback Web',
+                       'PolicyNumber': policyNumber
+                   }
+               }).done(function(e) {
+                   // Callback opened successfully
+                   $('body').addClass('widget');
+
+               }).fail(function(e) {
+                   // Callback isn't opened
+               });
+           }
+         };
+      </script>
+      <!-- <div class="container-fluid">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h2 class="text-center">Homesite Callback Widget</h2>
+             </div>
+         </div>
+         </div> -->
+      <section class="section">
+         <!-- Header 2017  START-->
+         <header class="headerMain">
+            <div class="headerDesktop">
+               <!-- --------- .headerDesktop START ------------- -->
+               <div class="container-fluid policyOverview"></div>
+               <div class="container-fluid">
+                  <!------- .brandingProfileLogout  .container-fluid START-->
+                  <div class="container paddingNone">
+                     <div class="row">
+                        <div class="col-xs-12 brandingContainer">
+                           <div id="logo" class="logo"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!------- .brandingProfileLogout  .container-fluid END-->
+            </div>
+            <!-- --------- .headerDesktop END ------------- -->
+         </header>
+         <!-- --------- header 2017 END ------------- -->
+         <div class="container containerIntro ">
+            <div class="row">
+               <div class="col-md-2"></div>
+               <div class="col-md-8 main">
+                  <h2 class="sectionTitle">Schedule a callback</h2>
+                  <div class="text">Would you like a callback a a specific time or day?</div>
+                  <div class="text">Please enter your information and we will call when it's best for you. </div>
+               </div>
+               <div class="col-md-2"></div>
+            </div>
+         </div>
+      </section>
+      <footer>
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div>© Copyright 1999 – 2020 All Rights Reserved. </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+   </body>
+</html>
